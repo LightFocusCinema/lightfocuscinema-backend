@@ -94,7 +94,10 @@ function errorResponse(res, error) {
         return res.status(400).json({ message: "Esiste già un'attrezzatura con questo slug.", fields: { slug: "Slug già in uso." } });
     }
     const status = error.name === "ValidationError" || error.name === "CastError" ? 400 : 500;
-    res.status(status).json({ message: error.message });
+    if (status === 500) console.error("[rental]", error);
+    // Cloudinary can reject with plain objects that carry no `message`.
+    const message = error.message || (error.error && error.error.message) || "Errore interno del server";
+    res.status(status).json({ message });
 }
 
 // Creates or updates an item: validates everything before uploading, so a refused
