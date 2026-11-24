@@ -21,6 +21,7 @@ server.use("/api/videoclip", require("./routes/videoclip"));
 server.use("/api/produzioni", require("./routes/produzioni"));
 server.use("/api/contatti", require("./routes/contatti"));
 server.use("/api/eventi", require("./routes/eventi"));
+server.use("/api/rental", require("./routes/rental"));
 
 // Rotta di test
 server.get("/", (req, res) => {
